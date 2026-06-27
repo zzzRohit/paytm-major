@@ -1,0 +1,22 @@
+{
+  "name": "@repo/store",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    "./useBalance": {
+      "types": "./src/hooks/useBalance.ts",
+      "default": "./src/hooks/useBalance.ts"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "recoil": "^0.7.7"
+  }
+}

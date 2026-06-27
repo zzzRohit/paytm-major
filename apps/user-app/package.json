@@ -1,0 +1,44 @@
+{
+  "name": "user-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@repo/db": "*",
+    "@repo/store": "*",
+    "@repo/ui": "*",
+    "@tailwindcss/postcss": "^4.3.1",
+    "bcrypt": "^6.0.0",
+    "next": "^14.2.35",
+    "next-auth": "^4.24.14",
+    "postcss": "^8.5.15",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "recoil": "^0.7.7",
+    "tailwindcss": "^4.3.1"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "@types/bcrypt": "^6.0.0",
+    "@types/node": "^20.11.24",
+    "@types/react": "^18.2.61",
+    "@types/react-dom": "^18.2.19",
+    "typescript": "^5.3.3"
+  },
+  "optionalDependencies": {
+    "@next/swc-darwin-arm64": "^14.2.33",
+    "@next/swc-darwin-x64": "^14.2.33",
+    "@next/swc-linux-arm64-gnu": "^14.2.33",
+    "@next/swc-linux-arm64-musl": "^14.2.33",
+    "@next/swc-linux-x64-gnu": "^14.2.33",
+    "@next/swc-linux-x64-musl": "^14.2.33",
+    "@next/swc-win32-arm64-msvc": "^14.2.33",
+    "@next/swc-win32-ia32-msvc": "^14.2.33",
+    "@next/swc-win32-x64-msvc": "^14.2.33"
+  }
+}
