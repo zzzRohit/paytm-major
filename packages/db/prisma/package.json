@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "scripts": {
+    "seed": "node seed.js"
+  }
+}
