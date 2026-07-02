@@ -1,11 +1,11 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOptions } from "../../lib/auth";
+import { authOptions } from "../../../lib/auth";
 import { DashboardActions } from "./DashboardActions";
 
 export default async function DashboardPage(): Promise<JSX.Element> {
   const session = await getServerSession(authOptions);
-
+  
   if (!session?.user) {
     redirect("/login");
   }

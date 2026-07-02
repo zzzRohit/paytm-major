@@ -23,6 +23,7 @@
     "packages/*"
   ],
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "next": "^16.2.9"
   }
 }
