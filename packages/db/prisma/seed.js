@@ -43,6 +43,18 @@ async function main() {
     ],
   );
 
+  await pool.query(
+    `
+      INSERT INTO "Balance" ("userId", "amount", "locked")
+      SELECT id, $1, $2 FROM "User" WHERE phone = $3
+      ON CONFLICT ("userId") DO UPDATE
+      SET
+        "amount" = EXCLUDED."amount",
+        "locked" = EXCLUDED."locked"
+    `,
+    [200, 0, "9876543210"],
+  );
+
   console.log("Seed completed");
 }
 

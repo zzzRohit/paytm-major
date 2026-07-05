@@ -14,14 +14,8 @@ model User {
   phone              String?             @unique
   password           String?
   createdAt          DateTime            @default(now())
-  onRampTransactions OnRampTransaction[]
   balance            Balance?
-}
-
-enum OnRampStatus {
-  Success
-  Failure
-  Processing
+  onRampTransactions OnRampTransaction[]
 }
 
 model OnRampTransaction {
@@ -41,6 +35,12 @@ model Balance {
   amount Int
   locked Int
   user   User @relation(fields: [userId], references: [id])
+}
+
+enum OnRampStatus {
+  Success
+  Failure
+  Processing
 }
 
 enum AuthType {

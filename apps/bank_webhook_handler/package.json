@@ -1,7 +1,6 @@
 {
   "name": "bank_webhook_handler",
   "type": "module",
-
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -15,6 +14,7 @@
     "express": "^5.2.1"
   },
   "devDependencies": {
-    "@types/express": "^5.0.6"
+    "@types/express": "^5.0.6",
+    "tsx": "^4.23.0"
   }
 }
