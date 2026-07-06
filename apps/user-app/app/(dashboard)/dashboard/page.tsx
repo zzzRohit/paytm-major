@@ -1,14 +1,14 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { DashboardActions } from "./DashboardActions";
+import db from "@repo/db";
 
 export default async function DashboardPage(): Promise<JSX.Element> {
   const session = await getServerSession();
-  
   if (!session?.user) {
     redirect("/login");
   }
-
+  
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-10 text-slate-950">
       <section className="mx-auto max-w-5xl">
@@ -37,6 +37,7 @@ export default async function DashboardPage(): Promise<JSX.Element> {
           </div>
         </div>
       </section>
+      
     </main>
   );
 }

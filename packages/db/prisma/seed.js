@@ -15,7 +15,9 @@ for (const envPath of [
 }
 
 if (!process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL is not set in packages/db/.env or paytm-project/.env");
+  throw new Error(
+    "DATABASE_URL is not set in packages/db/.env or paytm-project/.env",
+  );
 }
 
 const { Pool } = pg;
@@ -43,6 +45,59 @@ async function main() {
     ],
   );
 
+  // Add a few more test users with balances
+  const users = [
+    {
+      name: "Test User A",
+      email: "usera@example.com",
+      phone: "9876543211",
+      password: "$2b$10$dDdKPiwoFNDQfr8WhlTfe.iRAmLr4SmD86bIUgnF5E05fxub39ZwG",
+      balance: 500,
+    },
+    {
+      name: "Test User B",
+      email: "userb@example.com",
+      phone: "9876543212",
+      password: "$2b$10$dDdKPiwoFNDQfr8WhlTfe.iRAmLr4SmD86bIUgnF5E05fxub39ZwG",
+      balance: 300,
+    },
+    {
+      name: "Test User C",
+      email: "userc@example.com",
+      phone: "9876543213",
+      password: "$2b$10$dDdKPiwoFNDQfr8WhlTfe.iRAmLr4SmD86bIUgnF5E05fxub39ZwG",
+      balance: 100,
+    },
+  ];
+
+  for (const u of users) {
+    await pool.query(
+      `
+        INSERT INTO "User" ("name", "email", "phone", "password")
+        VALUES ($1, $2, $3, $4)
+        ON CONFLICT ("phone") DO UPDATE
+        SET
+          "name" = EXCLUDED."name",
+          "email" = EXCLUDED."email",
+          "password" = EXCLUDED."password"
+      `,
+      [u.name, u.email, u.phone, u.password],
+    );
+
+    await pool.query(
+      `
+        INSERT INTO "Balance" ("userId", "amount", "locked")
+        SELECT id, $1, $2 FROM "User" WHERE phone = $3
+        ON CONFLICT ("userId") DO UPDATE
+        SET
+          "amount" = EXCLUDED."amount",
+          "locked" = EXCLUDED."locked"
+      `,
+      [u.balance, 0, u.phone],
+    );
+  }
+
+  // Ensure the original test user has a balance too
   await pool.query(
     `
       INSERT INTO "Balance" ("userId", "amount", "locked")
